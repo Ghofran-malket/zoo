@@ -4,41 +4,48 @@
         <meta charset="UTF-8">
         <title>{% block title %}Zoo{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link href="/scss/custom.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/app.css">
-        
+        <link rel="stylesheet" href="scss/main.css">
+        <link rel="stylesheet" href="css/style.css">
+        {% block stylesheets %}
+        {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    
+    
+        <nav class="navbar navbar-expand-lg bg-transparent fixed-top">
             <div class="container-fluid d-flex justify-content-end">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ">
                         <li class="nav-item mx-3">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link text-white" href="#">Services</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="#">Habitats</a>
+                            <a class="nav-link text-white" href="#">Habitats</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="#">Connection</a>
+                            <a class="nav-link text-white" href="#">Connection</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link text-white" href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
+
+        
 
       
         
         {% block body %}{% endblock %}
+        
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
