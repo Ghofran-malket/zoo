@@ -9,6 +9,14 @@ $secondary: #595D8D;
 $background: #9395B8;
 $dark: #2E3263;
 
+.carousel-indicators [data-bs-target] {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+}
+.carousel-indicators {
+    bottom: -10% !important;
+}
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
