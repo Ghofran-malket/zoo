@@ -6,8 +6,9 @@
 $primary: #111439;
 $light: #F8F8F9;
 $secondary: #595D8D;
-$background: #9395B8;
+$info: #9395B8;
 $dark: #2E3263;
+$--bs-card-bg: #F8F8F9;
 
 .carousel-indicators [data-bs-target] {
     width: 20px !important;
@@ -18,6 +19,11 @@ $dark: #2E3263;
     bottom: -10% !important;
 }
 
+h6>a {
+    text-decoration: none !important;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
 
 // Then add additional custom code here
