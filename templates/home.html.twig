@@ -179,7 +179,8 @@
                      <div class="card p-4" style="background-color:#F8F8F9;border-radius:25px;">
                         <div class="card-body text-start">
                             <h5 class="card-title text-black">Jose Almen</h5>
-                            <p class="card-text" style="color:#666;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+
+                            <p class="card-text" style="color:#666;"> <i class="bi bi-star-fill"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                         when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                             
@@ -193,4 +194,43 @@
             
         </div>
     </div>
+
+    <!-- Laissez un commentaire Section -->
+    <div class="bg-light py-5">
+        <div class="container text-start px-5">
+            <div>
+                <h3 class="text-primary">Laissez votre commentaire</h3>
+            </div>
+            <div class="card bg-dark my-4 p-5" style="border-radius:25px;">
+                <form>
+                        <div class="mb-3 row">
+                            <div class="col-lg-3 col-sm-12 mb-2">
+                                <label for="psedoInput" class="form-label text-light">Un pseudo</label>
+                                <div id="pseudoHelp" class="form-text text-info">Cet avis sera ensuite soumis à validation par l’employé.</div>
+                            </div>
+                            <div class="col-lg-9 col-sm-12 mb-2">
+                                <input type="email" class="form-control" id="psedoInput" aria-describedby="pseudoHelp" placeholder="pseudo">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-lg-3 col-sm-12 mb-2">
+                                <label for="commentaireInput" class="form-label text-light">Commentaire</label>
+                            </div>
+                            <div class="col-lg-9 col-sm-12 mb-2">
+                                <textarea class="form-control"  id="commentaireInput" aria-label="Commentaire" placeholder="votre commentaire" style="height:100px"></textarea>
+                                
+                            </div>
+                        </div>
+                        <div class="mb-3 row justify-content-end">
+                            <div class="col-lg-1 col-sm-12 mb-2 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+            </div>
+            
+        </div>
+    </div>
+
 {% endblock %}
