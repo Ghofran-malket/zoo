@@ -39,4 +39,12 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/animal_details', name: 'app_animal_details')]
+    public function animal_details(): Response
+    {
+        return $this->render('animal_details.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
