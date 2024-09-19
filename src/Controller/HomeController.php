@@ -31,4 +31,12 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/habitats_details', name: 'app_habitats_details')]
+    public function habitats_details(): Response
+    {
+        return $this->render('habitats_details.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
