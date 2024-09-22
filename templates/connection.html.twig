@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        #carouselExampleRide {
+            display: none;
+        }
+        #intro {
+            position: relative;
+            bottom: 0;
+            right: 0;
+            top: 0;
+            left:0;
+            z-index:-1000;
+            background-image: url("images/connection2.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+        .centered-card{
+            margin-top:200px;
+            border-radius:25px;
+            margin-left:10vw;
+            margin-right:10vw;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div id="intro">
+        <div class="container text-start px-5 py-5">
+            
+            <div class="card bg-light p-5 centered-card">
+                <form>
+                    <div class="mb-3">
+                        <label for="usernameInput" class="form-label text-primary">username</label>
+                        <input type="email" class="form-control" id="usernameInput" placeholder="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label text-primary">Password</label>
+                        <input type="password" class="form-control" id="passwordInput" placeholder="password">
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+        
+        </div>
+    </div>
+
+{% endblock %}
