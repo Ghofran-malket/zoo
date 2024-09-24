@@ -3,6 +3,28 @@
 
 // Include any default variable overrides here (though functions won't be available)
 
+@font-face {
+    font-family: 'itim';
+    src: url('../fonts/Itim-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'irish';
+    src: url('../fonts/IrishGrover-Regular.ttf') format('.ttf'); // Use different formats for compatibility
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body, h3 {
+    font-family: 'itim', sans-serif !important;
+}
+h1 {
+    font-family: 'irish', serif !important;
+}
+
 $primary: #111439;
 $light: #F8F8F9;
 $secondary: #595D8D;

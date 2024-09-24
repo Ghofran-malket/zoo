@@ -1,4 +1,24 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "itim";
+  src: url("../fonts/Itim-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "irish";
+  src: url("../fonts/IrishGrover-Regular.ttf") format(".ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body, h3, .h3 {
+  font-family: "itim", sans-serif !important;
+}
+
+h1, .h1 {
+  font-family: "irish", serif !important;
+}
+
 .carousel-indicators [data-bs-target] {
   width: 20px !important;
   height: 20px !important;
