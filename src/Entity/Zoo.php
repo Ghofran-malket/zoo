@@ -20,12 +20,6 @@ class Zoo
     #[ORM\Column(length: 100)]
     private ?string $location = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeImmutable $open_hour = null;
-
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeImmutable $close_hour = null;
-
     #[ORM\Column(length: 100)]
     private ?string $price = null;
 
@@ -34,6 +28,24 @@ class Zoo
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $opening_time = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $phone_number = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $facebook_link = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $twitter_link = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $tiktok_link = null;
 
     public function getId(): ?int
     {
@@ -60,30 +72,6 @@ class Zoo
     public function setLocation(string $location): static
     {
         $this->location = $location;
-
-        return $this;
-    }
-
-    public function getOpenHour(): ?\DateTimeImmutable
-    {
-        return $this->open_hour;
-    }
-
-    public function setOpenHour(\DateTimeImmutable $open_hour): static
-    {
-        $this->open_hour = $open_hour;
-
-        return $this;
-    }
-
-    public function getCloseHour(): ?\DateTimeImmutable
-    {
-        return $this->close_hour;
-    }
-
-    public function setCloseHour(\DateTimeImmutable $close_hour): static
-    {
-        $this->close_hour = $close_hour;
 
         return $this;
     }
@@ -120,6 +108,78 @@ class Zoo
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getOpeningTime(): ?string
+    {
+        return $this->opening_time;
+    }
+
+    public function setOpeningTime(string $opening_time): static
+    {
+        $this->opening_time = $opening_time;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phone_number;
+    }
+
+    public function setPhoneNumber(string $phone_number): static
+    {
+        $this->phone_number = $phone_number;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFacebookLink(): ?string
+    {
+        return $this->facebook_link;
+    }
+
+    public function setFacebookLink(?string $facebook_link): static
+    {
+        $this->facebook_link = $facebook_link;
+
+        return $this;
+    }
+
+    public function getTwitterLink(): ?string
+    {
+        return $this->twitter_link;
+    }
+
+    public function setTwitterLink(?string $twitter_link): static
+    {
+        $this->twitter_link = $twitter_link;
+
+        return $this;
+    }
+
+    public function getTiktokLink(): ?string
+    {
+        return $this->tiktok_link;
+    }
+
+    public function setTiktokLink(?string $tiktok_link): static
+    {
+        $this->tiktok_link = $tiktok_link;
 
         return $this;
     }

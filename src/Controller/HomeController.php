@@ -8,11 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    public function __construct(private ZooController $zooController)
+    {
+    }
+
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
+        $zooInfo = $this->zooController->index();
         return $this->render('home.html.twig', [
-            'controller_name' => 'HomeController',
+            'zooInfo' => $zooInfo,
         ]);
     }
 
