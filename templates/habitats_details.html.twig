@@ -4,19 +4,11 @@
 
     <div class="container text-center my-4">
         <div class="mb-4">
-            <h3 class="text-primary">Les habitats terrestres</h3>
+            <h3 class="text-primary">{{ habitat.name }}</h3>
         </div>
         <div class="p-5 text-start my-4 bg-light text-start my-4" style="border-radius:25px;">
             <p style="color:#666;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
+                {{ habitat.description }}
             </p>    
         </div>
         
@@ -29,86 +21,20 @@
 
             <div class="container my-4">
                 <div class="row justify-content-evenly">
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-1.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                        
+                    {% for animal in habitat.animals %}
+                        <div class="col-lg-3 col-sm-5 my-4">
+                            <a href="/animal_details" class="text-decoration-none">
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="{{ animal.images[0] }}" />
+                                <h6>{{ animal.name }}</h6>
+                            </a>
+                        </div>
+                    {% else %}
+                        <h6> No animal found in this habitats.</h6>
+                    {% endfor %}
+                    
+                   
                 </div>
-                <div class="row justify-content-evenly">
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-1.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                        
-                </div>
-                <div class="row justify-content-evenly">
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-1.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/animal-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-5 my-4">
-                        <a href="/animal_details" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="images/habitats-2.jpg" />
-                            <h6>animal</h6>
-                        </a>
-                    </div>
-                        
-                </div>
+                
             </div>
         </div>
 {% endblock %}

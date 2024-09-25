@@ -8,7 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(private ZooController $zooController)
+    public function __construct(
+        private ZooController $zooController,
+        private HabitatsController $habitatsController)
     {
     }
 
@@ -16,8 +18,10 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $zooInfo = $this->zooController->index();
+        $habitats = $this->habitatsController->habitats_in_home_page();
         return $this->render('home.html.twig', [
             'zooInfo' => $zooInfo,
+            'habitats' => $habitats,
         ]);
     }
 
@@ -29,21 +33,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/habitats', name: 'app_habitats')]
-    public function habitats(): Response
-    {
-        return $this->render('habitats.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('/habitats_details', name: 'app_habitats_details')]
-    public function habitats_details(): Response
-    {
-        return $this->render('habitats_details.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    
 
     #[Route('/animal_details', name: 'app_animal_details')]
     public function animal_details(): Response

@@ -13,7 +13,6 @@ class ZooController extends AbstractController
     {
     }
 
-    #[Route('/zoo', name: 'app_zoo')]
     public function index()
     {
         return $this->repository->findAll();
