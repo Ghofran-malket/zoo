@@ -42,12 +42,4 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-
-    #[Route('/connection', name: 'app_connection')]
-    public function connection(): Response
-    {
-        return $this->render('connection.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
 }
