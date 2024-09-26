@@ -7,31 +7,48 @@
                 <h3 class="text-primary">Contact us:</h3>
             </div>
             <div class="card bg-dark my-4 p-5" style="border-radius:25px;">
-                <form>
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
                     <div class="mb-3 row">
                         <div class="col-lg-3 col-sm-12 mb-2">
-                            <label for="titleInput" class="form-label text-light">Title</label>
+                            {{ form_label(form.title, 'Title', {'label_attr': {'class': 'form-label text-light'}}) }}
                         </div>
                         <div class="col-lg-9 col-sm-12 mb-2">
-                            <input type="text" class="form-control" id="titleInput" placeholder="title">
+                            {{ form_widget(form.title, {'attr': {
+                                'class': 'form-control', 
+                                'id': 'titleInput', 
+                                'placeholder': 'title',
+                                'type': 'text',
+                            }}) }}
+                            
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="col-lg-3 col-sm-12 mb-2">
-                            <label for="emailInput" class="form-label text-light">Email</label>
+                            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label text-light'}}) }}
                         </div>
                         <div class="col-lg-9 col-sm-12 mb-2">
-                            <input type="email" class="form-control" id="emailInput" placeholder="email">
+                            {{ form_widget(form.email, {'attr': {
+                                'class': 'form-control', 
+                                'id': 'emailInput', 
+                                'placeholder': 'email',
+                                'type': 'email',
+                            }}) }}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-lg-3 col-sm-12 mb-2">
-                            <label for="descInput" class="form-label text-light">Description</label>
+                            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label text-light'}}) }}
                         </div>
                         <div class="col-lg-9 col-sm-12 mb-2">
-                            <textarea class="form-control"  id="descInput" aria-label="Description" placeholder="description" style="height:100px"></textarea>
-                                
+                            {{ form_widget(form.description, {'attr': {
+                                'class': 'form-control', 
+                                'id': 'descInput', 
+                                'aria-label': 'Description',
+                                'placeholder': 'description',
+                                'style': 'height:100px'
+                            }}) }}
+                               
                         </div>
                     </div>
                     <div class="mb-3 row justify-content-end">
@@ -40,7 +57,7 @@
                         </div>
                     </div>
                         
-                </form>
+                {{ form_end(form) }}
             </div>
             
         </div>
