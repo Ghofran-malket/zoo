@@ -19,6 +19,10 @@ h1, .h1 {
   font-family: "irish", serif !important;
 }
 
+.nav-link.active {
+  color: #AA1945 !important;
+}
+
 .carousel-indicators [data-bs-target] {
   width: 20px !important;
   height: 20px !important;

@@ -32,6 +32,9 @@ $info: #9395B8;
 $dark: #2E3263;
 $--bs-card-bg: #F8F8F9;  
 
+.nav-link.active{
+    color:#AA1945 !important;
+}
 .carousel-indicators [data-bs-target] {
     width: 20px !important;
     height: 20px !important;
