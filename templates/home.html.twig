@@ -79,45 +79,21 @@
                 <h3>les avis</h3>
             </div>
             <div class="row justify-content-around my-4">
-                <div class="col-lg-5 col-sm-12 my-2">
-                     <div class="card p-4" style="background-color:#F8F8F9;border-radius:25px;">
-                        <div class="card-body text-start">
-                            <h5 class="card-title text-black">
+                {% for opinion in opinions %}
+                    <div class="col-lg-5 col-sm-12 my-2">
+                        <div class="card p-4 bg-light" style="border-radius:25px;">
+                            <div class="card-body text-start">
                                 <h5 class="card-title text-black">
-                                Jose Almen 
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </h5>
-                            <p class="card-text" style="color:#666;">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
-                            
+                                    {{opinion.name}}
+                                </h5>
+                                <p class="card-text" style="color:#666;">
+                                    {{ opinion.commentaire }}
+                                </p>
+                                
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-sm-12 my-2">
-                     <div class="card p-4" style="background-color:#F8F8F9;border-radius:25px;">
-                        <div class="card-body text-start">
-                            <h5 class="card-title text-black">
-                                Jose Almen 
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </h5>
-
-                            <p class="card-text" style="color:#666;">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
-                            
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="row text-end my-4">
                 <h6><a href="/">Plus d'avis</a></h6>

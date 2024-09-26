@@ -13,7 +13,8 @@ class HomeController extends AbstractController
         private HabitatsController $habitatsController,
         private AnimalController $animalController,
         private ServiceController $serviceController,
-        private SliderController $sliderController,)
+        private SliderController $sliderController,
+        private OpinionController $opinionController,)
     {
     }
 
@@ -25,6 +26,7 @@ class HomeController extends AbstractController
         $habitats = $this->habitatsController->habitats_in_home_page();
         $services = $this->serviceController->services_in_home_page();
         $animaux = $this->animalController->animaux_in_home_page();
+        $opinions = $this->opinionController->opinions_in_home_page();
 
         return $this->render('home.html.twig', [
             'zooInfo' => $zooInfo,
@@ -32,6 +34,7 @@ class HomeController extends AbstractController
             'habitats' => $habitats,
             'services' => $services,
             'animaux' => $animaux,
+            'opinions' => $opinions,
         ]);
     }
 
