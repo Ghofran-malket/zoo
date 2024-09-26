@@ -11,7 +11,8 @@ class HabitatsController extends AbstractController
 {
     public function __construct(
         private HabitatsRepository $repository,
-        private ZooController $zooController,)
+        private ZooController $zooController,
+        private SliderController $sliderController,)
     {
     }
 
@@ -24,9 +25,11 @@ class HabitatsController extends AbstractController
     public function habitats(): Response
     {
         $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
         $habitats= $this->repository->findAll();
         return $this->render('habitats.html.twig', [
             'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
             'habitats' => $habitats,
         ]);
     }
@@ -40,9 +43,11 @@ class HabitatsController extends AbstractController
             throw $this->createNotFoundException('Habitat not found');
         }
         $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
         return $this->render('habitats_details.html.twig', [
             'habitat' => $habitat,
             'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
         ]);
     }
 }

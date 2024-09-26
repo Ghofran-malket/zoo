@@ -44,15 +44,16 @@
         <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
             <div class="carousel-inner">
             
-                <div class="carousel-item active">
-                    <div class="d-block slider-background  w-100">
-                        <div class="text-white display-center">
-                            <h1>Présentation du zoo</h1>
-                            <h2>Welcome to our zoo</h1>
+                {% for slider in sliders %}
+                    <div class="carousel-item {% if loop.first %} active {% endif %}">
+                        <div class="d-block slider-background  w-100" style="background-image: url('{{slider.image}}');">
+                            <div class="text-white display-center">
+                                <h1>{{ slider.title }} </h1>
+                                <h2>{{ slider.subtitle }}</h1>
+                            </div>
                         </div>
                     </div>
-
-                </div>
+                {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

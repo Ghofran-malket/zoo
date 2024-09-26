@@ -11,7 +11,8 @@ class ServiceController extends AbstractController
 {
     public function __construct(
         private ServiceRepository $repository,
-        private ZooController $zooController,)
+        private ZooController $zooController,
+        private SliderController $sliderController,)
     {
     }
 
@@ -24,9 +25,11 @@ class ServiceController extends AbstractController
     public function services(): Response
     {
         $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
         $services= $this->repository->findAll();
         return $this->render('services.html.twig', [
             'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
             'services' => $services,
         ]);
     }

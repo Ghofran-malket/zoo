@@ -11,7 +11,8 @@ class AnimalController extends AbstractController
 {
     public function __construct(
         private AnimalRepository $repository,
-        private ZooController $zooController,)
+        private ZooController $zooController,
+        private SliderController $sliderController,)
     {
     }
 
@@ -29,8 +30,10 @@ class AnimalController extends AbstractController
             throw $this->createNotFoundException('Animal not found');
         }
         $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
         return $this->render('animal_details.html.twig', [
             'animal' => $animal,
+            'sliders' => $sliders,
             'zooInfo' => $zooInfo,
         ]);
     }
