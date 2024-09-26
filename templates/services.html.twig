@@ -8,34 +8,16 @@
         <div>
             <h3 class="text-primary">Nos services</h3>
         </div>
-        <div class="p-5 bg-light text-start my-4" style="border-radius:25px;">
-            
-            <h5 class="text-primary">le premier service</h5> 
-            <p style="color:#666;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
-            </p>    
-        </div>
-        <div class="p-5 bg-light text-start my-4" style="border-radius:25px;">
-            
-            <h5 class="text-primary">Deuxième service</h5> 
-            <p style="color:#666;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
-            </p>    
-        </div>
-        <div class="p-5 bg-light text-start my-4" style="border-radius:25px;">
-            
-            <h5 class="text-primary">Troisième service</h5> 
-            <p style="color:#666;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book
-            </p>    
-        </div>
-        
+        {% for service in services %}
+            <div class="p-5 bg-light text-start my-4" style="border-radius:25px;">
+                <h5 class="text-primary">{{ service.title }}</h5> 
+                <p style="color:#666;">
+                    {{ service.description }}
+                </p>    
+            </div>
+        {% else %}
+            <h6> No Services found.</h6>
+        {% endfor %}
     </div>
 
 {% endblock %}

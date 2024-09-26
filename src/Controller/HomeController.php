@@ -11,7 +11,8 @@ class HomeController extends AbstractController
     public function __construct(
         private ZooController $zooController,
         private HabitatsController $habitatsController,
-        private AnimalController $animalController,)
+        private AnimalController $animalController,
+        private ServiceController $serviceController,)
     {
     }
 
@@ -20,20 +21,14 @@ class HomeController extends AbstractController
     {
         $zooInfo = $this->zooController->index();
         $habitats = $this->habitatsController->habitats_in_home_page();
+        $services = $this->serviceController->services_in_home_page();
         $animaux = $this->animalController->animaux_in_home_page();
 
         return $this->render('home.html.twig', [
             'zooInfo' => $zooInfo,
             'habitats' => $habitats,
+            'services' => $services,
             'animaux' => $animaux,
-        ]);
-    }
-
-    #[Route('/services', name: 'app_services')]
-    public function services(): Response
-    {
-        return $this->render('services.html.twig', [
-            'controller_name' => 'HomeController',
         ]);
     }
 
