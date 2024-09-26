@@ -23,8 +23,8 @@
                 <div class="row justify-content-evenly">
                     {% for animal in habitat.animals %}
                         <div class="col-lg-3 col-sm-5 my-4">
-                            <a href="/animal_details" class="text-decoration-none">
-                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="avatar2" src="{{ animal.images[0] }}" />
+                            <a href="{{ url('app_animal_details', {'id': animal.id}) }}" class="text-decoration-none">
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
                                 <h6>{{ animal.name }}</h6>
                             </a>
                         </div>
