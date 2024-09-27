@@ -32,16 +32,28 @@
                             or app.request.attributes.get('_route') == 'app_habitats_details'
                             or app.request.attributes.get('_route') == 'app_animal_details' ? 'active' : '' }}" href="/habitats">Habitats</a>
                         </li>
-                        <li class="nav-item mx-3">
-                            <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_connection' ? 'active' : '' }}" href="/connection">Connection</a>
-                        </li>
+                        {% if app.user %}
+                            <li class="nav-item mx-3">
+                                <form id="logout-form" action="{{ path('logout') }}" method="post" style="display:none;">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                                </form>
+                                <button class="nav-link text-white {{ app.request.attributes.get('_route') == 'logout' ? 'active' : '' }}" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </button>
+                            </li>
+                        {% else %}
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'login' ? 'active' : '' }}" href="/login">Connection</a>
+                            </li>
+                        {% endif %}
+
                         <li class="nav-item mx-3">
                             <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_contact_us' ? 'active' : '' }}" href="/contact_us">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav>      
         
         <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
             <div class="carousel-inner">
@@ -65,10 +77,12 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
-        
+        </div>        
 
-      
+        {% if app.user %}
+            <a class="nav-link" href="#">Welcome, {{ app.user.getUserIdentifier() }}</a>
+        {% endif %}
+    
         
         {% block body %}{% endblock %}
 

@@ -4,7 +4,7 @@ security:
     password_hashers:
         App\Entity\User:
             algorithm: auto
-            
+
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER]
         ROLE_VETERINARY: [ROLE_USER]
@@ -15,7 +15,6 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
-        users_in_memory: { memory: null }
 
     firewalls:
         dev:
@@ -27,8 +26,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                enable_csrf: true
             logout:
                 path: logout
+                target: app_home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -42,7 +43,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/veterinary, roles: ROLE_VETERINARY }
         - { path: ^/employee, roles: ROLE_EMPLOYEE }
-        - { path: ^/visitor, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 when@test:
     security:
