@@ -24,7 +24,7 @@ class Animal
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Habitats $habitats = null;
+    private ?Habitats $habitat = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -73,14 +73,14 @@ class Animal
         return $this;
     }
 
-    public function getHabitatsId(): ?Habitats
+    public function getHabitatId(): ?Habitats
     {
-        return $this->habitats;
+        return $this->habitat;
     }
 
-    public function setHabitatsId(?Habitats $habitats): static
+    public function setHabitatId(?Habitats $habitat): static
     {
-        $this->habitats = $habitats;
+        $this->habitat = $habitat;
 
         return $this;
     }

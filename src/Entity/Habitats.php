@@ -25,7 +25,7 @@ class Habitats
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'habitats', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'habitat', orphanRemoval: true)]
     private Collection $animals;
 
     #[ORM\Column]
@@ -92,7 +92,7 @@ class Habitats
     {
         if (!$this->animals->contains($animal)) {
             $this->animals->add($animal);
-            $animal->setHabitatsId($this);
+            $animal->setHabitatId($this);
         }
 
         return $this;
@@ -102,8 +102,8 @@ class Habitats
     {
         if ($this->animals->removeElement($animal)) {
             // set the owning side to null (unless already changed)
-            if ($animal->getHabitatsId() === $this) {
-                $animal->setHabitatsId(null);
+            if ($animal->getHabitatId() === $this) {
+                $animal->setHabitatId(null);
             }
         }
 
