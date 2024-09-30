@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AnimalRepository;
+use App\Repository\ReportDeSanteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +13,8 @@ class AnimalController extends AbstractController
     public function __construct(
         private AnimalRepository $repository,
         private ZooController $zooController,
-        private SliderController $sliderController,)
+        private SliderController $sliderController,
+        private ReportDeSanteRepository $reportDeSanteRepository,)
     {
     }
 
@@ -29,12 +31,19 @@ class AnimalController extends AbstractController
         if (!$animal) {
             throw $this->createNotFoundException('Animal not found');
         }
+        $latestReport = $this->reportDeSanteRepository->findLatestReportForAnimal($id);
+
+        if (!$latestReport) {
+            return new Response("No health report found for this animal.");
+        }
+
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
         return $this->render('animal_details.html.twig', [
             'animal' => $animal,
             'sliders' => $sliders,
             'zooInfo' => $zooInfo,
+            'latestReport' => $latestReport,
         ]);
     }
 }

@@ -19,8 +19,22 @@
             </p> 
             <p style="color:#666;">
                 L'habitat où {{ animal.name }} est affecté : {{ animal.getHabitatId().name }}
-                
-            </p>    
+            </p>  
+            <p style="color:#666;">
+                L'état de l’animal {{ animal.name }} : {{ latestReport.state }}
+            </p>  
+            <p style="color:#666;">
+                La nourriture proposée de {{ animal.name }} : {{ latestReport.food }}
+            </p>
+            <p style="color:#666;">
+                Le grammage de la nourriture de {{ animal.name }} : {{ latestReport.foodWeight }}
+            </p>
+            <p style="color:#666;">
+                Le date de passage : {{ latestReport.createdAt|date('Y-m-d') }} A  {{ latestReport.createdAt|date('H:i') }} heure
+            </p>
+            <p style="color:#666;">
+                Détail de l’état de l’animal : {{ latestReport.additionalInfo }}
+            </p>
         </div>
         
     </div>
