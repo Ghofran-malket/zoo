@@ -37,16 +37,19 @@ class HomeController extends AbstractController
         $services = $this->serviceController->services_in_home_page();
         $animaux = $this->animalController->animaux_in_home_page();
         $opinions = $this->opinionController->opinions_in_home_page();
-
+        $isAdmin= $this->isGranted('ROLE_ADMIN');
+        $isVete= $this->isGranted('ROLE_VETERINARY');
+        $isEmployee= $this->isGranted('ROLE_EMPLOYEE');
         // Create a new Opinion entity
         $opinion = new Opinion();
 
+        
         // Create the form
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($this->request);
 
         // Handle form submission
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && !$isAdmin && !$isVete && !$isEmployee) {
             // Set created_at manually if needed
             $opinion->setCreatedAt(new \DateTimeImmutable());
             $opinion->setIsAuthorized(false);
@@ -67,7 +70,7 @@ class HomeController extends AbstractController
             'services' => $services,
             'animaux' => $animaux,
             'opinions' => $opinions,
-            'form' => $form->createView(),
+            'form' => !$isAdmin && !$isVete && !$isEmployee ? $form->createView() : null,
         ]);
     }
 
