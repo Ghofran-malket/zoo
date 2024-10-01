@@ -20,6 +20,7 @@
             <p style="color:#666;">
                 L'habitat où {{ animal.name }} est affecté : {{ animal.getHabitatId().name }}
             </p>  
+            {% if latestReport != null %}
             <p style="color:#666;">
                 L'état de l’animal {{ animal.name }} : {{ latestReport.state }}
             </p>  
@@ -35,7 +36,17 @@
             <p style="color:#666;">
                 Détail de l’état de l’animal : {{ latestReport.additionalInfo }}
             </p>
+            {% else %}
+            <p style="color:#666;">
+                Aucun rapport de santé trouvé
+            </p>
+            {% endif %}
+            
         </div>
         
+        {% if is_granted('ROLE_VETERINARY') %}
+            <a href="{{ path('app_report_de_sante_create', {'id' : '5' }) }}" class="btn btn-primary">Create new health report</a>
+        {% endif %}
+
     </div>
 {% endblock %}

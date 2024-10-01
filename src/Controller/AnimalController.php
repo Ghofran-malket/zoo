@@ -33,10 +33,6 @@ class AnimalController extends AbstractController
         }
         $latestReport = $this->reportDeSanteRepository->findLatestReportForAnimal($id);
 
-        if (!$latestReport) {
-            return new Response("No health report found for this animal.");
-        }
-
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
         return $this->render('animal_details.html.twig', [
