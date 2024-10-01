@@ -26,6 +26,9 @@ class Opinion
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column]
+    private ?bool $isAuthorized = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Opinion
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function isIsAuthorized(): ?bool
+    {
+        return $this->isAuthorized;
+    }
+
+    public function setIsAuthorized(bool $isAuthorized): static
+    {
+        $this->isAuthorized = $isAuthorized;
 
         return $this;
     }

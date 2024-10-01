@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!-- Les services Section -->
+
+    <div class="container text-center my-4">
+        <div>
+            <h3 class="text-primary">Users opinion</h3>
+        </div>
+
+        {% for opinion in opinions %}
+            <div class="p-5 bg-light text-start my-4" style="border-radius:25px;">
+                <h5 class="text-primary">{{ opinion.name }}</h5> 
+                <p style="color:#666;">
+                    {{ opinion.commentaire }}
+                </p>
+                {% if is_granted('ROLE_EMPLOYEE') %}
+                    {% if opinion.isAuthorized %}
+                        <div class="alert alert-success">
+                            <h6 class="alert-heading">Autorisé</h6>
+                            <p>Ce commentaire est actif et actuellement disponible.</p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            <h6 class="alert-heading">Non autorisé</h6>
+                            <p>Ce commentaire est inactif et actuellement indisponible.</p>
+                            <a href="{{ path('app_opinions_edit', {'id': opinion.id}) }}" class="btn btn-success">autoriser ce commentaire</a>
+                            <form method="post" action="{{ path('app_opinions_delete', {'id': opinion.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ opinion.id) }}">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                  
+                   
+            </div>
+        {% else %}
+            <h6> No Opinions found.</h6>
+        {% endfor %}
+
+        
+    </div>
+
+
+{% endblock %}

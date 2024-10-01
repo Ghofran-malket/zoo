@@ -86,7 +86,7 @@
                                 <h5 class="card-title text-black">
                                     {{opinion.name}}
                                 </h5>
-                                <p class="card-text" style="color:#666;">
+                                <p class="card-text" style="color:#666;height:100px">
                                     {{ opinion.commentaire }}
                                 </p>
                                 
@@ -96,7 +96,12 @@
                 {% endfor %}
             </div>
             <div class="row text-end my-4">
-                <h6><a href="/">Plus d'avis</a></h6>
+                {% if is_granted('ROLE_EMPLOYEE') %}
+                    <h6><a href="{{ path('app_opinions_show_all') }}">Plus d'avis</a></h6>
+                {% else %}
+                    <h6><a href="{{ path('app_opinions_show') }}">Plus d'avis</a></h6>
+                {% endif %}
+                
             </div>
             
         </div>

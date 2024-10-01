@@ -49,6 +49,7 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Set created_at manually if needed
             $opinion->setCreatedAt(new \DateTimeImmutable());
+            $opinion->setIsAuthorized(false);
 
             // Persist and flush the entity
             $this->entityManager->persist($opinion);

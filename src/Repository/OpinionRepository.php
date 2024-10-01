@@ -21,28 +21,24 @@ class OpinionRepository extends ServiceEntityRepository
         parent::__construct($registry, Opinion::class);
     }
 
-//    /**
-//     * @return Opinion[] Returns an array of Opinion objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Find all entities where isAuthorised is true.
+     */
+    public function findAllAuthorised()
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.isAuthorized = :isAuthorized')
+            ->setParameter('isAuthorized', true)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Opinion
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findLatestTwoAuthorised()
+    {
+        return $this->findBy(
+            ['isAuthorized' => true],
+            ['updated_at' => 'DESC'],
+            2
+        );
+    }
 }
