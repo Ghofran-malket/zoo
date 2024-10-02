@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard-style.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div id="intro">
+        <div class="container text-start px-5 py-5">
+
+            <div style="margin-top:150px;">
+                <h3 class="text-light text-center"> Create new user with specific role </h3>
+            </div>
+            <div class="card bg-light p-5 centered-card" style="margin-top:40px;">
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label text-primary'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.email, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'emailInput', 
+                            'placeholder': 'title',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.password, 'password', {'label_attr': {'class': 'form-label text-primary'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.password, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'passwordInput', 
+                            'placeholder': 'password',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.roles, 'Roles', {'label_attr': {'class': 'form-label text-primary'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2" >
+                            {{ form_widget(form.roles, {'attr': {
+                                'style': 'color:primary; width:300px',
+                            }}) }}
+                                    
+                    </div>
+                </div>
+                
+                <div class="mb-3 row justify-content-end">
+                    <div class="col-lg-1 col-sm-12 mb-2 text-center">
+                        <button type="submit" class="btn color-rose text-white">Create</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}

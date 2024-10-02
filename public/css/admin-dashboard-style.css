@@ -1,0 +1,20 @@
+#carouselExampleRide {
+    display: none;
+}
+#intro {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left:0;
+    background-image: url("/images/connection2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.centered-card{
+    margin-top:200px;
+    border-radius:25px;
+    margin-left:10vw;
+    margin-right:10vw;
+}

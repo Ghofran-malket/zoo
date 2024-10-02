@@ -47,6 +47,7 @@ security:
         - { path: ^/services/admin, roles: ROLE_ADMIN }
         - { path: ^/reportDeSante/veterinary, roles: ROLE_VETERINARY }
         - { path: ^/opinions/employee, roles: ROLE_EMPLOYEE }
+        - { path: ^/user/admin/create, roles: ROLE_ADMIN }
 
 when@test:
     security:
