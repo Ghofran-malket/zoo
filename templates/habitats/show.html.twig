@@ -6,11 +6,20 @@
         <div class="mb-4">
             <h3 class="text-primary">Nos habitats</h3>
         </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_habitats_create') }}" class="btn btn-primary">Create New Habitats</a>
+        {% endif %}
+
         <div class="row justify-content-evenly">
             {% for habitat in habitats %}
                 <div class="col-lg-3 col-sm-5 my-4">
                     <a href="{{ url('app_habitats_details', {'id': habitat.id}) }}" class="text-decoration-none">
+                    {% if habitat.images[0] starts with 'http' %}
                         <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ habitat.images[0] }}" />
+                    {% else %}
+                        <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ asset('uploads/images/' ~ habitat.images[0]) }}" />
+                    {% endif %}
                         <h6>{{ habitat.name }}</h6>
                     </a>
                 </div>
