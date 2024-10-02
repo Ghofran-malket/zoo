@@ -96,4 +96,41 @@ class HabitatsController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/edit/{id}', name: '_edit')]
+    //methods={"GET", "POST"})]
+    public function edit(Request $request, Habitats $habitat, EntityManagerInterface $em): Response
+    {
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $form = $this->createForm(HabitatType::class, $habitat);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $habitat->setUpdatedAt(new \DateTimeImmutable());
+            $em->flush();
+
+            return $this->redirectToRoute('app_habitats_details');
+        }
+
+        return $this->render('habitats/edit.html.twig', [
+            'habitat' => $habitat,
+            'form' => $form->createView(),
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+        ]);
+    }
+
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/delete/{id}', name: '_delete')]
+    public function delete(Request $request, Habitats $habitat, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$habitat->getId(), $request->request->get('_token'))) {
+            $em->remove($habitat);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_habitats_show');
+    }
+
 }

@@ -33,17 +33,18 @@ class RedirectAfterLoginSubscriber implements EventSubscriberInterface
          // Get the authenticated user
         /** @var User $user */
         $user = $event->getAuthenticationToken()->getUser();
+        $this->session->set('redirect_after_login', $this->router->generate('app_home'));
 
         // Check user roles and set redirect URL in the session
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $this->session->set('redirect_after_login', $this->router->generate('app_admin'));
-        } elseif (in_array('ROLE_VETERINARY', $user->getRoles())) {
-            $this->session->set('redirect_after_login', $this->router->generate('app_veterinaire'));
-        } elseif (in_array('ROLE_EMPLOYEE', $user->getRoles())) {
-            $this->session->set('redirect_after_login', $this->router->generate('app_employee'));
-        } else {
-            $this->session->set('redirect_after_login', $this->router->generate('app_home'));
-        }
+        // if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        //     $this->session->set('redirect_after_login', $this->router->generate('app_home'));
+        // } elseif (in_array('ROLE_VETERINARY', $user->getRoles())) {
+        //     $this->session->set('redirect_after_login', $this->router->generate('app_home'));
+        // } elseif (in_array('ROLE_EMPLOYEE', $user->getRoles())) {
+        //     $this->session->set('redirect_after_login', $this->router->generate('app_home'));
+        // } else {
+        //     $this->session->set('redirect_after_login', $this->router->generate('app_home'));
+        // }
     }
 
 }

@@ -9,7 +9,14 @@
         <div class="p-5 text-start my-4 bg-light text-start my-4" style="border-radius:25px;">
             <p style="color:#666;">
                 {{ habitat.description }}
-            </p>    
+            </p>  
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_habitats_edit', {'id': habitat.id}) }}" class="btn btn-primary">Edit</a>
+                <form method="post" action="{{ path('app_habitats_delete', {'id': habitat.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ habitat.id) }}">
+                    <button class="btn btn-secondary">Delete</button>
+                </form>
+            {% endif %}  
         </div>
         
     </div>
