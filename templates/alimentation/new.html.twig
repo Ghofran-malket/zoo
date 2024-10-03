@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container text-start px-5 py-5">
+        <div>
+            <h3 class="text-primary text-center">Create New Alimentation for the  {{ animal.name }}</h3>
+        </div>
+        <div class="card bg-dark my-4 p-5" style="border-radius:25px;">
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.foodType, 'foodType', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.foodType, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'foodTypeInput', 
+                            'placeholder': 'foodType',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.quantity, 'quantity', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.quantity, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'quantityInput', 
+                            'placeholder': 'quantity',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+            
+                <div class="mb-3 row justify-content-end">
+                    <div class="col-lg-2 col-sm-12 mb-2 text-center">
+                        <a href="{{ path('app_alimentation_show') }}" class="btn btn-secondary text-white">Back to list</a>
+                    </div>
+                    <div class="col-lg-1 col-sm-12 mb-2 text-center">
+                        <button type="submit" class="btn color-rose text-white">Save</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

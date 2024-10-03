@@ -32,6 +32,12 @@
                             or app.request.attributes.get('_route') == 'app_habitats_details'
                             or app.request.attributes.get('_route') == 'app_animal_details' ? 'active' : '' }}" href="/habitats">Habitats</a>
                         </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_animal_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_animal_show') }}">Animals</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_alimentation_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_alimentation_show') }}">Animal Alimentation</a>
+                        </li>
                         {% if app.user %}
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item mx-3">
@@ -79,8 +85,19 @@
                     <div class="carousel-item {% if loop.first %} active {% endif %}">
                         <div class="d-block slider-background  w-100" style="background-image: url('{{slider.image}}');">
                             <div class="text-white display-center">
-                                <h1>{{ slider.title }} </h1>
-                                <h2>{{ slider.subtitle }}</h1>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <h1>Admin dashboard</h1>
+                                    <h2> Welcome, {{app.user.username}}</h1>
+                                    {% elseif is_granted('ROLE_EMPLOYEE') %}
+                                        <h1> Employee dashboard</h1>
+                                        <h2> Welcome, {{app.user.username}}</h1>
+                                    {% elseif is_granted('ROLE_VETERINARY') %}
+                                        <h1> Veterinary dashboard </h1>
+                                        <h2> Welcome, {{app.user.username}}</h1>
+                                    {% else %}
+                                        <h1>{{ slider.title }} </h1>
+                                        <h2>{{ slider.subtitle }}</h1>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -30,9 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ReportDeSante::class, mappedBy: 'veterinaire')]
     private Collection $reportDeSantes;
 
+    #[ORM\OneToMany(targetEntity: Alimentation::class, mappedBy: 'employee', orphanRemoval: true)]
+    private Collection $alimentations;
+
     public function __construct()
     {
         $this->reportDeSantes = new ArrayCollection();
+        $this->alimentations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,6 +143,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($reportDeSante->getVeterinaire() === $this) {
                 $reportDeSante->setVeterinaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Alimentation>
+     */
+    public function getAlimentations(): Collection
+    {
+        return $this->alimentations;
+    }
+
+    public function addAlimentation(Alimentation $alimentation): static
+    {
+        if (!$this->alimentations->contains($alimentation)) {
+            $this->alimentations->add($alimentation);
+            $alimentation->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlimentation(Alimentation $alimentation): static
+    {
+        if ($this->alimentations->removeElement($alimentation)) {
+            // set the owning side to null (unless already changed)
+            if ($alimentation->getEmployee() === $this) {
+                $alimentation->setEmployee(null);
             }
         }
 

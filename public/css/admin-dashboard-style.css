@@ -23,3 +23,8 @@
     min-height: 100vh;
     background-color: #F8F8F9;
 }
+
+.image-size-80 {
+    width: 80px;
+    height: 80px;
+}

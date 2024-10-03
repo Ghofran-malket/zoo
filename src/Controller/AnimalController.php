@@ -70,4 +70,18 @@ class AnimalController extends AbstractController
             
         ]);
     }
+
+    #[Route('/', name: '_show')]
+    public function index(): Response
+    {
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $animals= $this->repository->findAll();
+        return $this->render('animal/show.html.twig', [
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+            'animals' => $animals,
+        ]);
+    }
+
 }

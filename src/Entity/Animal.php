@@ -40,9 +40,13 @@ class Animal
     #[ORM\Column]
     private ?int $consultation_count = null;
 
+    #[ORM\OneToMany(targetEntity: Alimentation::class, mappedBy: 'animal', orphanRemoval: true)]
+    private Collection $alimentations;
+
     public function __construct()
     {
         $this->reportDeSantes = new ArrayCollection();
+        $this->alimentations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +164,36 @@ class Animal
     public function setConsultationCount(int $consultation_count): static
     {
         $this->consultation_count = $consultation_count;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Alimentation>
+     */
+    public function getAlimentations(): Collection
+    {
+        return $this->alimentations;
+    }
+
+    public function addAlimentation(Alimentation $alimentation): static
+    {
+        if (!$this->alimentations->contains($alimentation)) {
+            $this->alimentations->add($alimentation);
+            $alimentation->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlimentation(Alimentation $alimentation): static
+    {
+        if ($this->alimentations->removeElement($alimentation)) {
+            // set the owning side to null (unless already changed)
+            if ($alimentation->getAnimal() === $this) {
+                $alimentation->setAnimal(null);
+            }
+        }
 
         return $this;
     }

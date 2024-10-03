@@ -1,0 +1,42 @@
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard-style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="intro-color">
+    <div class="container text-start px-5 py-5">
+        <h1 class="text-primary">Liste des Animaux</h1>
+        <div class="table-responsive">
+            <table class="table rounded shadow-5-strong">
+                <thead class="text-primary">
+                    <tr>
+                        <th>Name</th>
+                        <th>Race</th>
+                        <th>image</th>
+                        <th>Habitats</th>
+                        <th>Alimentaion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for animal in animals %}
+                    <tr>
+                        <td>{{ animal.name }}</td>
+                        <td>{{ animal.race }}</td>
+                        <td>
+                            <img class="rounded-circle shadow-5-strong image-size-80" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
+                        </td>
+                        <td>{{ animal.getHabitatId().name }}</td>
+                        <td>
+                            <a href="{{ path('app_alimentation_create', {'animalId': animal.id}) }}" class="btn btn-primary">Create</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
