@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Animal;
 use App\Repository\AnimalRepository;
 use App\Repository\ReportDeSanteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/animal', name: 'app_animal')]
 class AnimalController extends AbstractController
 {
     public function __construct(
@@ -23,8 +26,8 @@ class AnimalController extends AbstractController
         return $this->repository->findBy([], null, 5);
     }
 
-    #[Route('/animal_details/{id}', name: 'app_animal_details')]
-    public function animal_details(int $id): Response
+    #[Route('/details/{id}', name: '_details')]
+    public function animal_details(int $id, EntityManagerInterface $em): Response
     {
         $animal = $this->repository->find($id);
 
@@ -32,6 +35,13 @@ class AnimalController extends AbstractController
             throw $this->createNotFoundException('Animal not found');
         }
         $latestReport = $this->reportDeSanteRepository->findLatestReportForAnimal($id);
+        
+        if (!$this->getUser()) {
+            $consultation_count = $animal->getConsultationCount() + 1 ;
+            $animal->setConsultationCount($consultation_count);
+            $em->persist($animal);
+            $em->flush();
+        }
 
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
@@ -40,6 +50,22 @@ class AnimalController extends AbstractController
             'sliders' => $sliders,
             'zooInfo' => $zooInfo,
             'latestReport' => $latestReport,
+        ]);
+    }
+
+    #[Route('/list', name: '_list')]
+    public function listAnimals(EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $animals = $entityManager->getRepository(Animal::class)->findAnimalsOrderedByConsultationCount();
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        return $this->render('animal/list.html.twig', [
+            'animals' => $animals,
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+            
         ]);
     }
 }

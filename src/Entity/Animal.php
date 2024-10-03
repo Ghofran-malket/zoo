@@ -37,6 +37,9 @@ class Animal
     #[ORM\OneToMany(targetEntity: ReportDeSante::class, mappedBy: 'animal')]
     private Collection $reportDeSantes;
 
+    #[ORM\Column]
+    private ?int $consultation_count = null;
+
     public function __construct()
     {
         $this->reportDeSantes = new ArrayCollection();
@@ -145,6 +148,18 @@ class Animal
                 $reportDeSante->setAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConsultationCount(): ?int
+    {
+        return $this->consultation_count;
+    }
+
+    public function setConsultationCount(int $consultation_count): static
+    {
+        $this->consultation_count = $consultation_count;
 
         return $this;
     }

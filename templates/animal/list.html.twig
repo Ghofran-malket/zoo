@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard-style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="intro-color">
+    <div class="container text-start px-5 py-5">
+        <h1 class="text-primary">List of Animals</h1>
+
+        <div class="table-responsive">
+            <table class="table rounded shadow-5-strong">
+            <thead class="text-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>name</th>
+                    <th>Consultation count</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for animal in animals %}
+                <tr>
+                    <td>{{ animal.id }}</td>
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.consultationCount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
