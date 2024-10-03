@@ -45,6 +45,7 @@ security:
         - { path: ^/employee, roles: ROLE_EMPLOYEE }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/services/admin, roles: ROLE_ADMIN }
+        - { path: ^/services/edit/, roles: [ ROLE_ADMIN, ROLE_EMPLOYEE] }
         - { path: ^/reportDeSante/veterinary, roles: ROLE_VETERINARY }
         - { path: ^/opinions/employee, roles: ROLE_EMPLOYEE }
         - { path: ^/user/admin, roles: ROLE_ADMIN }

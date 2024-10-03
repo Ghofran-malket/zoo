@@ -37,7 +37,11 @@
                         <div class="carousel-item {%if loop.first %} active {%endif%}">
                             <div class="row justify-content-around my-4">
                                 <div class="col-lg-6 col-sm-12 my-2">
-                                    <img src="{{ service.image }}" class="rounded shadow-5-strong" alt="{{ service.title }}" style="width:500px;height:350px;"> 
+                                    {% if service.image starts with 'http' %}
+                                        <img class="rounded shadow-5-strong" style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ service.image }}" />
+                                    {% else %}
+                                        <img class="rounded shadow-5-strong "  style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ asset('uploads/images/' ~ service.image) }}" />
+                                    {% endif %}
                                 </div>
                                 <div class="col-lg-6 col-sm-12 my-2 text-start">
                                     <h3>{{ service.title }}</h3>

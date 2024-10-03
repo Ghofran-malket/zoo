@@ -19,8 +19,10 @@
                 <p style="color:#666;">
                     {{ service.description }}
                 </p>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYEE') %}
                     <a href="{{ path('app_services_edit', {'id': service.id}) }}" class="btn btn-primary">Edit</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <form method="post" action="{{ path('app_services_delete', {'id': service.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ service.id) }}">
                         <button class="btn btn-secondary">Delete</button>

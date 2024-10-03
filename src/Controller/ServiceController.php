@@ -53,6 +53,14 @@ class ServiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image')->getData();
+            $image = '';
+            if ($file) {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $filename);
+                    $image = $filename;
+            }
+            $service->setImage($image);
             $service->setCreatedAt(new \DateTimeImmutable());
             $em->persist($service);
             $em->flush();
@@ -68,18 +76,30 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    #[IsGranted("ROLE_ADMIN")]
-    #[Route('/admin/edit/{id}', name: '_edit')]
+    
+    #[Route('/edit/{id}', name: '_edit')]
     //methods={"GET", "POST"})]
     public function edit(Request $request, Service $service, EntityManagerInterface $em): Response
     {
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_EMPLOYEE')) {
+            throw $this->createAccessDeniedException('You do not have access to this page.');
+        }
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image')->getData();
+            $image = '';
+            if ($file) {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $filename);
+                    $image = $filename;
+            }
+            $service->setImage($image);
             $service->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($service);
             $em->flush();
 
             return $this->redirectToRoute('app_services_show');
