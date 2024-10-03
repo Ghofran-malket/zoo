@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use App\Repository\AnimalRepository;
 use App\Repository\ReportDeSanteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,7 +46,7 @@ class AnimalController extends AbstractController
 
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
-        return $this->render('animal_details.html.twig', [
+        return $this->render('animal/details.html.twig', [
             'animal' => $animal,
             'sliders' => $sliders,
             'zooInfo' => $zooInfo,
@@ -53,7 +54,8 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    #[Route('/list', name: '_list')]
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/list', name: '_list')]
     public function listAnimals(EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

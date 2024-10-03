@@ -49,6 +49,7 @@ security:
         - { path: ^/opinions/employee, roles: ROLE_EMPLOYEE }
         - { path: ^/user/admin, roles: ROLE_ADMIN }
         - { path: ^/habitats/admin, roles: ROLE_ADMIN }
+        - { path: ^/animal/admin, roles: ROLE_ADMIN }
 
 when@test:
     security:
