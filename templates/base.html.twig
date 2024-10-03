@@ -10,7 +10,7 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    <body>
+    <body style="min-height:100vh;">
     
     
         <nav class="navbar navbar-expand-lg bg-primary fixed-top">
@@ -34,6 +34,9 @@
                         </li>
                         {% if app.user %}
                             {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_report_de_sante_show' ? 'active' : '' }}" href="{{ path('app_report_de_sante_show')}}">Reports</a>
+                                </li>
                                 <li class="nav-item mx-3">
                                     <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_user_create' ? 'active' : '' }}" href="{{ path('app_user_create')}}">Create user account</a>
                                 </li>

@@ -18,3 +18,8 @@
     margin-left:10vw;
     margin-right:10vw;
 }
+
+#intro-color {
+    min-height: 100vh;
+    background-color: #F8F8F9;
+}

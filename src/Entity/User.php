@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -24,6 +26,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    #[ORM\OneToMany(targetEntity: ReportDeSante::class, mappedBy: 'veterinaire')]
+    private Collection $reportDeSantes;
+
+    public function __construct()
+    {
+        $this->reportDeSantes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,5 +113,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // Si vous stockez des données temporaires sensibles sur l'utilisateur, effacez-les ici
+    }
+
+    /**
+     * @return Collection<int, ReportDeSante>
+     */
+    public function getReportDeSantes(): Collection
+    {
+        return $this->reportDeSantes;
+    }
+
+    public function addReportDeSante(ReportDeSante $reportDeSante): static
+    {
+        if (!$this->reportDeSantes->contains($reportDeSante)) {
+            $this->reportDeSantes->add($reportDeSante);
+            $reportDeSante->setVeterinaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportDeSante(ReportDeSante $reportDeSante): static
+    {
+        if ($this->reportDeSantes->removeElement($reportDeSante)) {
+            // set the owning side to null (unless already changed)
+            if ($reportDeSante->getVeterinaire() === $this) {
+                $reportDeSante->setVeterinaire(null);
+            }
+        }
+
+        return $this;
     }
 }

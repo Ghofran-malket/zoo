@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard-style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="intro-color">
+    <div class="container text-start px-5 py-5">
+        <h1 class="text-primary">Liste des Reports</h1>
+
+        <div class="table-responsive">
+            <table class="table rounded shadow-5-strong">
+            <thead class="text-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>State</th>
+                    <th>Additional info</th>
+                    <th>Date</th>
+                    <th>Veterinary</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.id }}</td>
+                    <td>{{ report.state }}</td>
+                    <td>{{ report.additionalInfo }}</td>
+                    <td>{{ report.createdAt|date('Y-m-d') }}</td>
+                    <td>{{ report.veterinaire.email }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

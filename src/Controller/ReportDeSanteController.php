@@ -27,9 +27,13 @@ class ReportDeSanteController extends AbstractController
     #[Route('/', name: '_show')]
     public function index(): Response
     {
-        $report= $this->repository->findAll();
-        return $this->render('report_de_sante/index.html.twig', [
-            'report' => $report,
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $reports = $this->repository->findAll();
+        return $this->render('reports/show.html.twig', [
+            'reports' => $reports,
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
         ]);
     }
 

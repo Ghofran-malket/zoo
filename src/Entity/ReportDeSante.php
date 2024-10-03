@@ -36,6 +36,10 @@ class ReportDeSante
     #[ORM\JoinColumn(nullable: false)]
     private ?Animal $animal = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reportDeSantes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $veterinaire = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +126,18 @@ class ReportDeSante
     public function setAnimal(?Animal $animal): static
     {
         $this->animal = $animal;
+
+        return $this;
+    }
+
+    public function getVeterinaire(): ?User
+    {
+        return $this->veterinaire;
+    }
+
+    public function setVeterinaire(?User $veterinaire): static
+    {
+        $this->veterinaire = $veterinaire;
 
         return $this;
     }
