@@ -52,6 +52,7 @@ security:
         - { path: ^/habitats/admin, roles: ROLE_ADMIN }
         - { path: ^/alimentation/employee, roles: ROLE_EMPLOYEE }
         - { path: ^/habitats/vet, roles: ROLE_VETERINARY }
+        - { path: ^/contact_us, roles: IS_ANONYMOUS }
 
 when@test:
     security:

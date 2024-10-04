@@ -8,8 +8,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Email;
 
+#[Route('/contact_us', name: 'app_contact_us')]
 class ContactUsController extends AbstractController
 {
     private $request;
@@ -23,8 +26,8 @@ class ContactUsController extends AbstractController
         $this->request = $requestStack->getCurrentRequest();
     }
 
-    #[Route('/contact_us', name: 'app_contact_us')]
-    public function contact_us(): Response
+    #[Route('/', name: '_send')]
+    public function contact_us(MailerInterface $mailer): Response
     {
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
@@ -38,11 +41,20 @@ class ContactUsController extends AbstractController
             $this->entityManager->persist($contact);
             $this->entityManager->flush();
 
-            // Flash message for success
-            $this->addFlash('success', 'Your message has been sent successfully!');
+            // Envoi de l'email au zoo
+            $email = (new Email())
+                ->from($contact->getEmail())
+                ->to('zoo@example.com') // Email du zoo
+                ->subject('Contact - ' . $contact->getTitle())
+                ->text($contact->getDescription());
+
+            $mailer->send($email);
+
+            // Redirection ou message de succès
+            $this->addFlash('success', 'Votre demande a été envoyée avec succès.');
 
             // Redirect after form submission
-            return $this->redirectToRoute('app_contact_us');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('contact_us.html.twig', [

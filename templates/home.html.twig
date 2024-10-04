@@ -11,8 +11,10 @@
             <div class="row justify-content-evenly my-4">
                 {% for habitat in habitats %}
                     <div class="col-lg-3 col-sm-5 my-2">
-                        <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ habitat.images[0]}}" />
-                        <h6>{{ habitat.name }}</h6>
+                        <a href="{{ url('app_habitats_details', {'id': habitat.id}) }}" class="text-decoration-none">
+                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ habitat.images[0]}}" />
+                            <h6>{{ habitat.name }}</h6>
+                        </a>
                     </div>
                 {% endfor %}
                 
@@ -35,19 +37,22 @@
                 <div class="carousel-inner">
                     {% for service in services %}
                         <div class="carousel-item {%if loop.first %} active {%endif%}">
+                            <a href="{{ url('app_services_show') }}" class="text-decoration-none">
                             <div class="row justify-content-around my-4">
-                                <div class="col-lg-6 col-sm-12 my-2">
-                                    {% if service.image starts with 'http' %}
-                                        <img class="rounded shadow-5-strong" style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ service.image }}" />
-                                    {% else %}
-                                        <img class="rounded shadow-5-strong "  style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ asset('uploads/images/' ~ service.image) }}" />
-                                    {% endif %}
-                                </div>
-                                <div class="col-lg-6 col-sm-12 my-2 text-start">
-                                    <h3>{{ service.title }}</h3>
-                                    <p>{{ service.description }}</p>
-                                </div>
+                                    <div class="col-lg-6 col-sm-12 my-2">
+                                        {% if service.image starts with 'http' %}
+                                            <img class="rounded shadow-5-strong" style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ service.image }}" />
+                                        {% else %}
+                                            <img class="rounded shadow-5-strong "  style="width:500px;height:350px;" alt="{{ service.title }}" src="{{ asset('uploads/images/' ~ service.image) }}" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 my-2 text-start text-white">
+                                        <h3>{{ service.title }}</h3>
+                                        <p>{{ service.description }}</p>
+                                    </div>
+                                
                             </div>
+                            </a>
                         </div>
                     {% endfor %}
                     
