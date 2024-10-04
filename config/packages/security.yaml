@@ -51,6 +51,7 @@ security:
         - { path: ^/user/admin, roles: ROLE_ADMIN }
         - { path: ^/habitats/admin, roles: ROLE_ADMIN }
         - { path: ^/alimentation/employee, roles: ROLE_EMPLOYEE }
+        - { path: ^/habitats/vet, roles: ROLE_VETERINARY }
 
 when@test:
     security:

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard-style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="intro-color">
+    <div class="container text-start px-5 py-5">
+        <h1 class="text-primary">List of veterinay opinions</h1>
+
+        <div class="table-responsive">
+            <table class="table rounded shadow-5-strong">
+            <thead class="text-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Veterinay opinion</th>
+                    <th>Is it need to Impoved?</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for habitat in habitats %}
+                {% if habitat.vetOpinion != null %}
+                    <tr>
+                        <td>{{ habitat.name }}</td>
+                        <td>{{ habitat.vetOpinion }}</td>
+                        <td>{{ habitat.needImproved }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

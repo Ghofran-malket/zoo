@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Habitats;
+use App\Form\HabitatAvisType;
 use App\Form\HabitatType;
 use App\Repository\HabitatsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +19,7 @@ class HabitatsController extends AbstractController
     public function __construct(
         private HabitatsRepository $repository,
         private ZooController $zooController,
-        private SliderController $sliderController,)
+        private SliderController $sliderController)
     {
     }
 
@@ -110,7 +111,7 @@ class HabitatsController extends AbstractController
             $habitat->setUpdatedAt(new \DateTimeImmutable());
             $em->flush();
 
-            return $this->redirectToRoute('app_habitats_details');
+            return $this->redirectToRoute('app_habitats_details', ['id' => $habitat->getId()]);
         }
 
         return $this->render('habitats/edit.html.twig', [
@@ -131,6 +132,43 @@ class HabitatsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_habitats_show');
+    }
+
+    #[IsGranted("ROLE_VETERINARY")]
+    #[Route('/vet/edit/{id}', name: '_vet_edit')]
+    public function vetEdit(Request $request, Habitats $habitat, EntityManagerInterface $em): Response
+    {
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $form = $this->createForm(HabitatAvisType::class, $habitat);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $habitat->setUpdatedAt(new \DateTimeImmutable());
+            $em->flush();
+
+            return $this->redirectToRoute('app_habitats_details', ['id' => $habitat->getId()]);
+        }
+
+        return $this->render('habitats/new-vet-opinion.html.twig', [
+            'habitat' => $habitat,
+            'form' => $form->createView(),
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+        ]);
+    }
+
+    #[Route('/opinions', name: '_vet_opinion')]
+    public function vetOpinions(): Response
+    {
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $habitats= $this->repository->findAll();
+        return $this->render('habitats/vet-opinions.html.twig', [
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+            'habitats' => $habitats,
+        ]);
     }
 
 }

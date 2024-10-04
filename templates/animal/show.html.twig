@@ -19,6 +19,9 @@
                         {% if is_granted('ROLE_EMPLOYEE') %}
                             <th>Alimentaion</th>
                         {% endif %}
+                        {% if is_granted('ROLE_VETERINARY') %}
+                            <th>Health Report</th>
+                        {% endif %}
                         
                     </tr>
                 </thead>
@@ -34,6 +37,11 @@
                         {% if is_granted('ROLE_EMPLOYEE') %}
                             <td>
                                 <a href="{{ path('app_alimentation_create', {'animalId': animal.id}) }}" class="btn btn-primary">Create</a>
+                            </td>
+                        {% endif %}
+                        {% if is_granted('ROLE_VETERINARY') %}
+                            <td>
+                                <a href="{{ path('app_report_de_sante_create', {'id' : animal.id }) }}" class="btn btn-primary">Create</a>
                             </td>
                         {% endif %}
                         

@@ -34,6 +34,12 @@ class Habitats
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $vet_opinion = null;
+
+    #[ORM\Column]
+    private ?bool $need_improved = null;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
@@ -130,6 +136,30 @@ class Habitats
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getVetOpinion(): ?string
+    {
+        return $this->vet_opinion;
+    }
+
+    public function setVetOpinion(?string $vet_opinion): static
+    {
+        $this->vet_opinion = $vet_opinion;
+
+        return $this;
+    }
+
+    public function isNeedImproved(): ?bool
+    {
+        return $this->need_improved;
+    }
+
+    public function setNeedImproved(bool $need_improved): static
+    {
+        $this->need_improved = $need_improved;
 
         return $this;
     }
