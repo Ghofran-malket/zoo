@@ -16,7 +16,10 @@
                         <th>Race</th>
                         <th>image</th>
                         <th>Habitats</th>
-                        <th>Alimentaion</th>
+                        {% if is_granted('ROLE_EMPLOYEE') %}
+                            <th>Alimentaion</th>
+                        {% endif %}
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -28,9 +31,12 @@
                             <img class="rounded-circle shadow-5-strong image-size-80" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
                         </td>
                         <td>{{ animal.getHabitatId().name }}</td>
-                        <td>
-                            <a href="{{ path('app_alimentation_create', {'animalId': animal.id}) }}" class="btn btn-primary">Create</a>
-                        </td>
+                        {% if is_granted('ROLE_EMPLOYEE') %}
+                            <td>
+                                <a href="{{ path('app_alimentation_create', {'animalId': animal.id}) }}" class="btn btn-primary">Create</a>
+                            </td>
+                        {% endif %}
+                        
                     </tr>
                 {% endfor %}
                 </tbody>

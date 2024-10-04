@@ -43,10 +43,12 @@ class OpinionController extends AbstractController
         ]);
     }
 
-    #[IsGranted("ROLE_EMPLOYEE")]
     #[Route('/employee', name: '_show_all')]
     public function showEmployee(): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_EMPLOYEE')) {
+            throw $this->createAccessDeniedException('You do not have access to this page.');
+        }
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
         $opinions= $this->repository->findAll();

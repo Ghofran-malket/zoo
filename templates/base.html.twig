@@ -32,13 +32,17 @@
                             or app.request.attributes.get('_route') == 'app_habitats_details'
                             or app.request.attributes.get('_route') == 'app_animal_details' ? 'active' : '' }}" href="/habitats">Habitats</a>
                         </li>
-                        <li class="nav-item mx-3">
-                            <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_animal_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_animal_show') }}">Animals</a>
-                        </li>
-                        <li class="nav-item mx-3">
-                            <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_alimentation_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_alimentation_show') }}">Animal Alimentation</a>
-                        </li>
+                        
                         {% if app.user %}
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_animal_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_animal_show') }}">Animals</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_alimentation_show' ? 'active' : '' }}" aria-current="page" href="{{ path('app_alimentation_show') }}">Alimentation</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_opinions_show_all' ? 'active' : '' }}" aria-current="page" href="{{ path('app_opinions_show_all') }}">Avis</a>
+                            </li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item mx-3">
                                     <a class="nav-link text-white {{ app.request.attributes.get('_route') == 'app_animal_list' ? 'active' : '' }}" href="{{ path('app_animal_list')}}">Animal Consultation</a>
