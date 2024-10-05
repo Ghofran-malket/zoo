@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container text-start px-5 py-5">
+        <div>
+            <h3 class="text-primary text-center">Create Zoo info</h3>
+        </div>
+        <div class="card bg-dark my-4 p-5" style="border-radius:25px;">
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.name, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'nameInput', 
+                            'placeholder': 'name',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.location, 'location', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                        {{ form_widget(form.location, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'locationInput', 
+                            'placeholder': 'location',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.price, 'price', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.price, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'priceInput', 
+                            'placeholder': 'price',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.opening_time, 'opening_time', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.opening_time, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'openingTimeInput', 
+                            'placeholder': 'opening time',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.phone_number, 'phone_number', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.phone_number, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'phoneInput', 
+                            'placeholder': 'phone number',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.description, 'description', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.description, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'descriptionInput', 
+                            'placeholder': 'description',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.facebook_link, 'facebook_link', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.facebook_link, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'facebookInput', 
+                            'placeholder': 'Facebook link',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.twitter_link, 'twitter_link', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.twitter_link, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'twitterInput', 
+                            'placeholder': 'Twitter Link',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        {{ form_label(form.tiktok_link, 'tiktok_link', {'label_attr': {'class': 'form-label text-light'}}) }}
+                    </div>
+                    <div class="col-lg-9 col-sm-12 mb-2">
+                            {{ form_widget(form.tiktok_link, {'attr': {
+                            'class': 'form-control', 
+                            'id': 'tiktokInput', 
+                            'placeholder': 'Tiktok link',
+                            'type': 'text',
+                        }}) }}
+                                    
+                    </div>
+                </div>
+                <div class="mb-3 row justify-content-end">
+                    <div class="col-lg-1 col-sm-12 mb-2 text-center">
+                        <button type="submit" class="btn color-rose text-white">Save</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
