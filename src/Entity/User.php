@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "IDENTIFY")]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
