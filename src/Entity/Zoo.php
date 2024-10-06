@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Zoo
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: "IDENTIFY")]
     #[ORM\Column]
     private ?int $id = null;
 

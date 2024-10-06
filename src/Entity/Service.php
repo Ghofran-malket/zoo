@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Types;
 class Service
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: "IDENTIFY")]
     #[ORM\Column]
     private ?int $id = null;
 
