@@ -1,6 +1,6 @@
 
 database:
-    type: mysql:10.6
+    type: mariadb:10.4
     disk: 512
 
 
