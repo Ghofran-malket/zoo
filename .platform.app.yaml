@@ -11,7 +11,9 @@ runtime:
         - iconv
         
 
-#variables:
+variables:
+    env:
+        DATABASE_URL: "mysql://user:password@database.internal:3306/dbname"
 #    php:
 #        # uncomment on PHP 7.4+
 #        #opcache.preload: config/preload.php
