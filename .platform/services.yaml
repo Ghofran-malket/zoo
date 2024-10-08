@@ -2,10 +2,5 @@
 database:
     type: mariadb:10.4
     disk: 1024
-    connections:
-            default:
-                username: root
-                password: Ghofran123$
-                database: sf_zoo_arcadia
 
 
