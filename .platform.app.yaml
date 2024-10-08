@@ -43,8 +43,12 @@ mounts:
     "/var": { source: local, source_path: var }
     
 relationships:
-    database:
+    database: "database:mysql"
 
+variables:
+    env:
+        # Fetching the database credentials dynamically from the relationships
+        DATABASE_URL: "mysql://${database.user}:${database.password}@${database.host}:${database.port}/${database.path}?charset=utf8mb4"
 hooks:
     build: |
         set -x -e
