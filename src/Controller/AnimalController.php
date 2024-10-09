@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Form\AnimalType;
 use App\Repository\AnimalRepository;
 use App\Repository\ReportDeSanteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -81,6 +83,44 @@ class AnimalController extends AbstractController
             'zooInfo' => $zooInfo,
             'sliders' => $sliders,
             'animals' => $animals,
+        ]);
+    }
+
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/create', name: '_create')]
+    public function new(Request $request, EntityManagerInterface $em): Response
+    {
+        $animal = new Animal();
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        $form = $this->createForm(AnimalType::class, $animal);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $files = $form->get('images')->getData();
+            $images = [];
+            if ($files) {
+                
+                foreach ($files as $file) {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $filename);
+                    $images[] = $filename;
+                }
+            }
+            $animal->setImages($images);
+            $animal->setCreatedAt(new \DateTimeImmutable());
+            $animal->setConsultationCount(1);
+            $em->persist($animal);
+            $em->flush();
+
+            return $this->redirectToRoute('app_animal_show');
+        }
+
+        return $this->render('animal/new.html.twig', [
+            'animal' => $animal,
+            'form' => $form->createView(),
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
         ]);
     }
 

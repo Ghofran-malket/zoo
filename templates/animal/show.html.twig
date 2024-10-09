@@ -7,7 +7,18 @@
 {% block body %}
 <div id="intro-color">
     <div class="container text-start px-5 py-5 mt-5">
-        <h1 class="text-primary">Liste des Animaux</h1>
+        <div class="row mb-5">
+            <div class="col">
+                <h1 class="text-primary">Animals list</h1>
+            </div>
+            <div class="col">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_animal_create') }}" class="btn btn-primary">Add new animal</a>
+                {% endif %}
+            </div>
+        </div>
+        
+       
         <div class="table-responsive">
             <table class="table rounded shadow-5-strong">
                 <thead class="text-primary">
@@ -31,7 +42,12 @@
                         <td>{{ animal.name }}</td>
                         <td>{{ animal.race }}</td>
                         <td>
-                            <img class="rounded-circle shadow-5-strong image-size-80" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
+                            {% if animal.images[0] starts with 'http' %}
+                                <img class="rounded-circle shadow-5-strong image-size-80" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
+                            {% else %}
+                                <img class="rounded-circle shadow-5-strong image-size-80" alt="{{ animal.name }}" src="{{ asset('uploads/images/' ~ animal.images[0]) }}" />
+                            {% endif %}
+                            
                         </td>
                         <td>{{ animal.getHabitatId().name }}</td>
                         {% if is_granted('ROLE_EMPLOYEE') %}
