@@ -126,7 +126,8 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: '_edit')]
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/edit/{id}', name: '_edit')]
     //methods={"GET", "POST"})]
     public function edit(Request $request, Animal $animal, EntityManagerInterface $em, int $id): Response
     {
