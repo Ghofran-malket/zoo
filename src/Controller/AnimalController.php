@@ -126,4 +126,65 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[Route('/edit/{id}', name: '_edit')]
+    //methods={"GET", "POST"})]
+    public function edit(Request $request, Animal $animal, EntityManagerInterface $em, int $id): Response
+    {
+        $animal_old_info = $this->repository->find($id);
+        $old_name = $animal_old_info->getName();
+        $zooInfo = $this->zooController->index();
+        $sliders = $this->sliderController->sliders_in_home_page();
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('You do not have access to this page.');
+        }
+        $form = $this->createForm(AnimalType::class, $animal);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $files = $form->get('images')->getData();
+            $images = [];
+            if ($files) {
+                
+                foreach ($files as $file) {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $filename);
+                    $images[] = $filename;
+                }
+                $animal->setImages($images);
+            }
+            
+            //if the name of the animal is changed we have to change t also in the mongoDB
+            $animal_name = $form->get('name')->getData();
+            if($animal_name){
+                
+                $this->mongoDBService->editAnimalName(newName: $animal_name, oldName: $old_name);
+            }
+
+            $animal->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($animal);
+            $em->flush();
+
+            return $this->redirectToRoute('app_animal_show');
+        }
+
+        return $this->render('animal/edit.html.twig', [
+            'animal' => $animal,
+            'form' => $form->createView(),
+            'zooInfo' => $zooInfo,
+            'sliders' => $sliders,
+        ]);
+    }
+
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/delete/{id}', name: '_delete')]
+    public function delete(Request $request, Animal $animal, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$animal->getId(), $request->request->get('_token'))) {
+            $em->remove($animal);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_animal_show');
+    }
+
 }

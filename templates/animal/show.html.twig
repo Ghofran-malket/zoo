@@ -33,6 +33,10 @@
                         {% if is_granted('ROLE_VETERINARY') %}
                             <th>Health Report</th>
                         {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        {% endif %}
                         
                     </tr>
                 </thead>
@@ -58,6 +62,17 @@
                         {% if is_granted('ROLE_VETERINARY') %}
                             <td>
                                 <a href="{{ path('app_report_de_sante_create', {'id' : animal.id }) }}" class="btn btn-primary">Create</a>
+                            </td>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td>
+                                <a href="{{ path('app_animal_edit', {'id': animal.id}) }}" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form method="post" action="{{ path('app_animal_delete', {'id': animal.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ animal.id) }}">
+                                    <button class="btn btn-secondary">Delete</button>
+                                </form>
                             </td>
                         {% endif %}
                         

@@ -62,4 +62,21 @@ class MongoDBService
         ]);
         return iterator_to_array($animals);
     }
+
+    public function editAnimalName(string $newName, string $oldName)
+    {
+        $collection = $this->getCollection('animals');
+
+        $animal = $collection->findOne(['name' => $oldName]);
+
+        if($animal){
+            $result = $collection->updateOne(
+                ['name' => $oldName],  // Query to match documents
+                ['$set' => ['name' => $newName]]
+            );
+            return $result->getModifiedCount();
+        }
+        
+        
+    }
 }
