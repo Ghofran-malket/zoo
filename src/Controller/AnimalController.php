@@ -12,16 +12,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\MongoDBService;
 
 #[Route('/animal', name: 'app_animal')]
 class AnimalController extends AbstractController
 {
+    private $mongoDBService;
     public function __construct(
         private AnimalRepository $repository,
         private ZooController $zooController,
         private SliderController $sliderController,
-        private ReportDeSanteRepository $reportDeSanteRepository,)
+        private ReportDeSanteRepository $reportDeSanteRepository,
+        MongoDBService $mongoDBService
+        )
     {
+        $this->mongoDBService = $mongoDBService;
     }
 
     public function animaux_in_home_page()
@@ -30,7 +35,7 @@ class AnimalController extends AbstractController
     }
 
     #[Route('/details/{id}', name: '_details')]
-    public function animal_details(int $id, EntityManagerInterface $em): Response
+    public function animal_details(int $id): Response
     {
         $animal = $this->repository->find($id);
 
@@ -40,10 +45,8 @@ class AnimalController extends AbstractController
         $latestReport = $this->reportDeSanteRepository->findLatestReportForAnimal($id);
         
         if (!$this->getUser()) {
-            $consultation_count = $animal->getConsultationCount() + 1 ;
-            $animal->setConsultationCount($consultation_count);
-            $em->persist($animal);
-            $em->flush();
+            //augmenter la consultaion count quand le client appele cette route
+            $this->mongoDBService->incrementConsultation($animal);
         }
 
         $zooInfo = $this->zooController->index();
@@ -109,10 +112,9 @@ class AnimalController extends AbstractController
             }
             $animal->setImages($images);
             $animal->setCreatedAt(new \DateTimeImmutable());
-            $animal->setConsultationCount(1);
+            $animal->setConsultationCount(0);
             $em->persist($animal);
             $em->flush();
-
             return $this->redirectToRoute('app_animal_show');
         }
 

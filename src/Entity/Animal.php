@@ -197,4 +197,9 @@ class Animal
 
         return $this;
     }
+
+    public function incrementConsultation()
+    {
+        $this->consultation_count++;
+    }
 }
