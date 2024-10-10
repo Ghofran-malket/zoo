@@ -12,7 +12,12 @@
                 {% for habitat in habitats %}
                     <div class="col-lg-3 col-sm-5 my-2">
                         <a href="{{ url('app_habitats_details', {'id': habitat.id}) }}" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ habitat.images[0]}}" />
+                            {% if habitat.images[0] starts with 'http' %}
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ habitat.images[0]}}" />
+                            {% else %}
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ habitat.name }}" src="{{ asset('uploads/images/' ~ habitat.images[0]) }}" />
+                            {% endif %}
+                            
                             <h6>{{ habitat.name }}</h6>
                         </a>
                     </div>
@@ -73,7 +78,11 @@
                 {% for animal in animaux %}
                     <div class="col-lg-2 col-sm-5 my-2">
                         <a href="{{ url('app_animal_details', {'id': animal.id}) }}" class="text-decoration-none">
-                            <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
+                            {% if animal.images[0] starts with 'http' %}
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ animal.name }}" src="{{ animal.images[0] }}" />
+                            {% else %}
+                                <img class="rounded-circle shadow-5-strong image-size mb-2" alt="{{ animal.name }}" src="{{ asset('uploads/images/' ~ animal.images[0]) }}" />
+                            {% endif %}
                             <h6>{{ animal.name }}</h6>
                         </a>
                     </div>

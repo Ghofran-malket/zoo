@@ -8,7 +8,11 @@
         <div class="d-flex flex-row my-5 justify-content-around">
             {% for image in animal.images %}
                 <div class="p-2">
-                    <img class="rounded shadow-5-strong w-100 item-image-size" alt="{{ animal.name }}" src="{{ image }}" />
+                    {% if animal.images[0] starts with 'http' %}
+                        <img class="rounded shadow-5-strong w-100 item-image-size" alt="{{ animal.name }}" src="{{ image }}" />
+                    {% else %}
+                        <img class="rounded shadow-5-strong w-100 item-image-size" alt="{{ animal.name }}" src="{{ asset('uploads/images/' ~ image) }}" />
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
