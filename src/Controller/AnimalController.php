@@ -61,11 +61,11 @@ class AnimalController extends AbstractController
 
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/admin/list', name: '_list')]
-    public function listAnimals(EntityManagerInterface $entityManager): Response
+    public function listAnimals(): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $animals = $entityManager->getRepository(Animal::class)->findAnimalsOrderedByConsultationCount();
+        $animals = $this->mongoDBService->findAnimalsOrderedByConsultationCount();
         $zooInfo = $this->zooController->index();
         $sliders = $this->sliderController->sliders_in_home_page();
         return $this->render('animal/list.html.twig', [

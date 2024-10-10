@@ -54,4 +54,12 @@ class MongoDBService
         
         return $animal ? $animal['consultation_count'] : 0;
     }
+
+    public function findAnimalsOrderedByConsultationCount(): array{
+        $collection = $this->getCollection('animals');
+        $animals = $collection->find([], [
+            'sort' => ['consultation_count' => -1]  // -1 for descending order
+        ]);
+        return iterator_to_array($animals);
+    }
 }

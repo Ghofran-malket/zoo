@@ -6,7 +6,7 @@
 {% block body %}
 <div id="intro-color">
     <div class="container text-start px-5 py-5 mt-5">
-        <h1 class="text-primary">List of Animals</h1>
+        <h1 class="text-primary">Animal's consultation list</h1>
 
         <div class="table-responsive">
             <table class="table rounded shadow-5-strong">
@@ -14,15 +14,17 @@
                 <tr>
                     <th>ID</th>
                     <th>name</th>
+                    <th>race</th>
                     <th>Consultation count</th>
                 </tr>
             </thead>
             <tbody>
             {% for animal in animals %}
                 <tr>
-                    <td>{{ animal.id }}</td>
+                    <td>{{animal.id}}</td>
                     <td>{{ animal.name }}</td>
-                    <td>{{ animal.consultationCount }}</td>
+                    <td>{{ animal.race }}</td>
+                    <td>{{ animal.consultation_count }}</td>
                 </tr>
             {% endfor %}
             </tbody>
