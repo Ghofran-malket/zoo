@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 
 class HomeController extends AbstractController
 {
@@ -50,6 +52,15 @@ class HomeController extends AbstractController
 
         // Handle form submission
         if ($form->isSubmitted() && $form->isValid() && !$isAdmin && !$isVete && !$isEmployee) {
+
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
+            $cleanName = $purifier->purify($opinion->getName());
+            $cleanCommentaire = $purifier->purify($opinion->getCommentaire());
+            $opinion->setName($cleanName);
+            $opinion->setCommentaire($cleanCommentaire);
+            
+
             // Set created_at manually if needed
             $opinion->setCreatedAt(new \DateTimeImmutable());
             $opinion->setIsAuthorized(false);

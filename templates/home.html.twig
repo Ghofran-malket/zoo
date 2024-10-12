@@ -153,7 +153,9 @@
                                 'aria-describedby': 'pseudoHelp',
                                 'placeholder': 'pseudo'
                             }}) }}
-                            {{ form_errors(form.name) }}
+                            <div style="color: red;">
+                                {{ form_errors(form.name) }}
+                            </div>
                         </div>
                     </div>
 
@@ -169,7 +171,9 @@
                                 'placeholder': 'votre commentaire',
                                 'style': 'height:100px'
                             }}) }}
-                            {{ form_errors(form.commentaire) }}
+                            <div style="color: red;">
+                                {{ form_errors(form.commentaire) }}
+                            </div>
                         </div>
                     </div>
 
