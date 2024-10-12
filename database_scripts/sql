@@ -1,0 +1,173 @@
+-- CREATE DATABASE sf_zoo_arcadia;
+
+-- USE sf_zoo_arcadia;
+
+-- CREATE TABLE animals (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     race VARCHAR(100) NOT NULL,
+--     images longtext NOT NULL,
+--     consultation_count INT NOT NULL,
+--     created_at DATETIME DEFAULT NOT NULL,
+--     updated_at DATETIME DEFAULT,
+-- );
+
+-- CREATE TABLE habitats (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     images longtext NOT NULL,
+--     description TEXT NOT NULL,
+--     vet_opinion VARCHAR(255) NOT NULL,
+--     need_improved tinyInt NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+-- //add relation many to one animal with habitats
+-- ALTER TABLE animals
+-- ADD COLUMN habitat_id INT;
+
+-- ALTER TABLE animals
+-- ADD CONSTRAINT fk_habitat
+-- FOREIGN KEY (habitat_id)
+-- REFERENCES habitats(id)
+-- ON DELETE SET NULL;
+
+-- //create alimentation table
+-- CREATE TABLE alimentation (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--    	food_type VARCHAR(255) NOT NULL,
+--     quantity VARCHAR(255) NOT NULL,
+--     feeding_time DATETIME
+-- );
+
+-- //create users table
+-- CREATE TABLE user (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--    email VARCHAR(180) NOT NULL,
+--     roles JSON NOT NULL,
+--     password VARCHAR(255) NOT NULL
+-- );
+
+-- //add relation many to one alimentation with animal
+-- //add relation many to one alimentation with users
+-- ALTER TABLE alimentation
+-- ADD COLUMN animal_id INT;
+
+-- ALTER TABLE alimentation
+-- ADD COLUMN employee_id INT;
+
+-- ALTER TABLE alimentation
+-- ADD CONSTRAINT fk_animal
+-- FOREIGN KEY (animal_id)
+-- REFERENCES animals(id)
+-- ON DELETE SET NULL;
+
+-- ALTER TABLE alimentation
+-- ADD CONSTRAINT fk_user
+-- FOREIGN KEY (employee_id)
+-- REFERENCES users(id)
+-- ON DELETE SET NULL;
+
+-- //create contact table
+-- CREATE TABLE conatct (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     title VARCHAR(100) NOT NULL,
+--     email VARCHAR(100) NOT NULL,
+--     description TEXT NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+-- //create opinion table
+-- CREATE TABLE opinion (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     commentaire Text NOT NULL,
+--     is_authorized boolean NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+-- //create repor_de_sante table
+-- CREATE TABLE report_de_sante (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     state VARCHAR(255) NOT NULL,
+--     food VARCHAR(255) NOT NULL,
+--     food_weight VARCHAR(255) NOT NULL,
+--     additional_info Text NOT NULL,
+--     is_authorized boolean NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME,
+--     animal_id INT,
+--     FOREIGN KEY (animal_id) REFERENCES animals(id),
+--     veterinaire_id INT,
+--     FOREIGN KEY (veterinaire_id) REFERENCES users(id)
+-- );
+
+-- //create service table
+-- CREATE TABLE service (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     title VARCHAR(100) NOT NULL,
+--     image  VARCHAR(255) NOT NULL,
+--     description TEXT NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+-- //create slider table
+-- CREATE TABLE slider (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     title VARCHAR(100) NOT NULL,
+--     subtitle VARCHAR(100) NOT NULL,
+--     image  VARCHAR(255) NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+-- //create zoo table
+-- CREATE TABLE zoo (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     location VARCHAR(100) NOT NULL,
+--     price VARCHAR(100) NOT NULL,
+--     opening_time VARCHAR(100) NOT NULL,
+--     phone_number VARCHAR(100) NOT NULL,
+--     description Longtext NOT NULL,
+--     facebook_link VARCHAR(100) NOT NULL,
+--     twitter_link VARCHAR(100) NOT NULL,
+--     tiktok_link VARCHAR(100) NOT NULL,
+--     created_at DATETIME,
+--     updated_at DATETIME
+-- );
+
+
+-- INSERT INTO habitats (name, images, description, vet_opinion, need_improved) VALUES
+-- ('Savannah', '{"0": "https://images.unsplash.com/photo-1709517266484-4efb1269b473?q=80&w=1750&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}', 'Open grasslands with scattered trees.', 'opinion', 0),
+-- ('Rainforest', '{"0": "https://images.unsplash.com/photo-1709517266484-4efb1269b473?q=80&w=1750&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}', 'Open grasslands with scattered trees.', 'opinion', 0),
+-- ('Desert', '{"0": "https://images.unsplash.com/photo-1709517266484-4efb1269b473?q=80&w=1750&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}', 'Open grasslands with scattered trees.', 'opinion', 0);
+
+-- INSERT INTO animals (name, race, images, consultation_count, habitat_id) VALUES
+-- ('liom', 'Savannah','{ "0" : "https://images.unsplash.com/photo-1711249566519-86889833ac34?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}', 5, 2 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
